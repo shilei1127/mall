@@ -1,0 +1,17 @@
+# Project exclude paths
+/gmall-parent/common/common-util/target/
+/gmall-parent/common/service-util/target/
+/gmall-parent/model/target/
+/gmall-parent/server-gateway/target/
+/gmall-parent/service/service-auth/target/
+/gmall-parent/service/service-cart/target/
+/gmall-parent/service/service-item/target/
+/gmall-parent/service/service-list/target/
+/gmall-parent/service/service-order/target/
+/gmall-parent/service/service-product/target/
+/gmall-parent/service/service-user/target/
+/gmall-parent/service-client/service-cart-client/target/
+/gmall-parent/service-client/service-item-client/target/
+/gmall-parent/service-client/service-list-client/target/
+/gmall-parent/service-client/service-product-client/target/
+/gmall-parent/web/web-all/target/

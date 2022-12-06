@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.gmall.product.mapper.BaseAttrInfoMapper">
+
+    <resultMap id="baseAttrInfoMap" type="com.atguigu.gmall.model.product.BaseAttrInfo" autoMapping="true">
+        <id column="id" property="id"/>
+        <collection property="attrValueList" ofType="com.atguigu.gmall.model.product.BaseAttrValue" autoMapping="true">
+        <id column="base_attr_value_id" property="id"></id>
+        </collection>
+    </resultMap>
+    <!--根据分类查询平台属性和值-->
+    <select id="selectBaseAttrInfoByCategoryId" resultMap="baseAttrInfoMap">
+        SELECT
+            t1.id,
+            t1.attr_name,
+            t1.category_id,
+            t1.category_level,
+            t2.id AS base_attr_value_id,
+            t2.value_name,
+            t2.attr_id
+        FROM
+            base_attr_info t1
+            LEFT JOIN base_attr_value t2 ON t1.id = t2.attr_id
+        <where>
+            <if test="category1Id != null and category1Id != 0">
+                ( category_id = #{category1Id} AND category_level = 1 )
+            </if>
+            <if test="category2Id != null and category2Id != 0">
+                OR ( category_id = #{category2Id} AND category_level = 2 )
+            </if>
+            <if test="category3Id != null and category3Id != 0">
+                OR (category_id = #{category3Id} AND category_level = 3)
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAttrInfoBySkuId" resultMap="baseAttrInfoMap">
+        SELECT
+            t1.id,
+            t1.attr_name,
+            t1.category_id,
+            t1.category_level,
+            t3.id AS base_attr_value_id,
+            t3.value_name,
+            t3.attr_id
+        FROM
+            base_attr_info t1
+                INNER JOIN sku_attr_value t2 ON t1.id = t2.attr_id
+                INNER JOIN base_attr_value t3 ON t1.id = t3.attr_id
+                AND t2.value_id = t3.id
+        WHERE
+            t2.sku_id = #{skuId};
+    </select>
+</mapper>
