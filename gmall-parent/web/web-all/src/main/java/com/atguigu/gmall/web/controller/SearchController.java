@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
+/**
+ * 商品搜索控制层
+ */
 @Controller
 @RequestMapping("/page/search")
 public class SearchController {
@@ -31,6 +34,7 @@ public class SearchController {
         //拼接当前的url
         String url = getUrl(searchData);
         model.addAttribute("url", url);
+
         //获取排序的url
         String softUrl = getSoftUrl(searchData);
         model.addAttribute("softUrl", softUrl);
